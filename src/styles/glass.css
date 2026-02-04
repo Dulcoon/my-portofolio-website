@@ -1,0 +1,135 @@
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+}
+.glass-card-hover {
+  transition: all 0.3s ease;
+}
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+/* Neon button styles */
+.neon-button {
+  background: var(--neon-lime);
+  color: #0a0a0f;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px var(--neon-lime-glow);
+}
+.neon-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--neon-lime-glow), 0 0 60px var(--neon-lime-glow);
+}
+.neon-button:active {
+  transform: translateY(0);
+}
+/* Neon text */
+.neon-text {
+  color: var(--neon-lime);
+  text-shadow: 0 0 10px var(--neon-lime-glow);
+}
+
+
+/* button sosmed */
+.social-card {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  display: flex;
+  gap: 20px;
+  padding: 18px 28px;
+  border-radius: 16px;
+
+  /* glass look */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1.5px solid rgba(217,249,157,.45);
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.45),
+    0 0 18px rgba(217,249,157,.25);
+
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.social-icon {
+  position: relative;
+  z-index: 2;
+  color: #d9f99d;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color .35s ease;
+}
+
+.social-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #d9f99d;
+  transform: translate(var(--x), var(--y));
+  transition: transform .45s cubic-bezier(.4,0,.2,1);
+  z-index: 1;
+}
+
+.social-card {
+  --x: -100%;
+  --y: 0%;
+}
+
+.social-card:hover::before {
+  --x: 0%;
+  --y: 0%;
+}
+
+.social-card:hover .social-icon {
+  color: #0a0a0f;
+}
+
+
+
+
+
+/* Glass input */
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.glass-input:focus {
+  outline: none;
+  border-color: var(--neon-lime);
+  box-shadow: 0 0 0 3px var(--neon-lime-glow);
+}
+.glass-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* di card project */
+.view-detail-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}

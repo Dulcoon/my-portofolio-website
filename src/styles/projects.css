@@ -1,0 +1,231 @@
+/* PROJECTS SECTION (Desktop Defaults - Matching Original Inline Styles) */
+.projects-section {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0a0a0f, #1a1a2e);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects-container {
+    display: block;
+    /* gap: 80px;  (Gap doesn't apply to block, but keeping for reference if flex is used) */
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* LEFT SIDE (Title) */
+.projects-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.projects-title {
+    /* Absolute styling from original */
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: -5%;
+    /* Adjusted to be half-covered (peek out top) */
+    text-align: center;
+    font-size: 8rem;
+    /* Original size */
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 4px;
+    line-height: 1;
+    z-index: 0;
+}
+
+/* RIGHT SIDE (Slider) */
+.projects-right {
+    position: relative;
+    z-index: 1;
+    /* Ensure slides are interactive */
+}
+
+.projects-slider {
+    position: relative;
+    min-height: 360px;
+    /* Original minHeight */
+    width: 100%;
+}
+
+.project-slide {
+    position: absolute;
+    inset: 0;
+    padding: 48px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    /* Original didn't specify justify-content, but needed for layout consistency */
+}
+
+.project-step {
+    font-size: 3rem;
+    color: rgba(217, 249, 157, 0.25);
+    font-weight: 700;
+    margin-bottom: 0px;
+    /* Original stepStyle didn't have margin, but cleaner with it */
+}
+
+.project-name {
+    font-size: 1.6rem;
+    /* Original projectTitle size */
+    color: #fff;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+.project-desc {
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 12px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.project-tech {
+    margin-top: 18px;
+    display: inline-block;
+    color: #d9f99d;
+    font-size: 0.85rem;
+}
+
+.project-btn-container {
+    position: relative;
+    z-index: 9999;
+    width: 100%;
+    text-align: right;
+    margin-top: 24px;
+}
+
+.view-detail-btn {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.view-detail-btn:hover {
+    color: #d9f99d;
+}
+
+/* INDICATORS */
+.projects-nav {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+/* ========================================= */
+/* RESPONSIVE MEDIA QUERIES */
+/* ========================================= */
+
+@media (max-width: 1024px) {
+    .projects-container {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .projects-title {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-section {
+        padding-top: 60px;
+        align-items: flex-start;
+        /* Allow scroll if needed, fix centering issues */
+    }
+
+    .projects-container {
+        width: 100%;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* RESET LAYOUT FOR MOBILE */
+    .projects-title {
+        position: relative;
+        /* No longer absolute */
+        top: auto;
+        left: auto;
+        transform: none;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .projects-slider {
+        min-height: 400px;
+        /* Reduced fixed height */
+    }
+
+    .project-slide {
+        padding: 24px 30px;
+        /* justify-content: flex-start; */
+    }
+
+    .project-step {
+        font-size: 2.5rem;
+    }
+
+    .project-name {
+        font-size: 1.4rem;
+        margin-top: 8px;
+    }
+
+    /* TRUNCATE DESCRIPTION ON MOBILE */
+    .project-desc {
+        font-size: 0.95rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* SHOW TECH STACK ON MOBILE */
+    .project-tech {
+        display: inline-block;
+        margin-top: auto;
+        margin-bottom: 40px;
+        /* Add space for button */
+    }
+
+    /* PIN BUTTON TO BOTTOM */
+    .project-btn-container {
+        margin-top: auto;
+        position: absolute;
+        bottom: 24px;
+        right: 30px;
+        text-align: right;
+    }
+}

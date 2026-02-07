@@ -1,45 +1,20 @@
-import { useLayoutEffect, useRef, useEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import '../styles/glass.css'
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import '../styles/glass.css'
+import '../styles/projects.css'
 
 gsap.registerPlugin(ScrollTrigger)
 ScrollTrigger.defaults({
   markers: false,
 })
 
-
-// const projects = [
-//   {
-//     title: 'PaulusConnect',
-//     desc: 'Church service & community mobile app',
-//     tech: 'Flutter · Laravel · Firebase',
-//   },
-//   {
-//     title: 'E-Commerce App',
-//     desc: 'Full stack shopping platform',
-//     tech: 'React · Express · MySQL',
-//   },
-//   {
-//     title: 'AR Interview App',
-//     desc: 'Interactive AR interview experience',
-//     tech: 'Flutter · Unity · OpenAI',
-//   },
-//   {
-//     title: 'Web AR Experience',
-//     desc: 'Three.js + WebXR project',
-//     tech: 'Three.js · WebXR',
-//   },
-// ]
-
 export default function Projects() {
   const sectionRef = useRef(null)
   const slidesRef = useRef([])
   const navRef = useRef([])
-
-
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -56,43 +31,43 @@ export default function Projects() {
         pointerEvents: 'none',
       })
 
-      // FIX BUG: slide pertama HARUS explicit
-      gsap.set(slidesRef.current[0], {
-        opacity: 1,
-        scale: 1,
-        x: 0,
-        filter: 'blur(0px)',
-        pointerEvents: 'auto',
+      // Active first slide explicit setup
+      if (slidesRef.current[0]) {
+        gsap.set(slidesRef.current[0], {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          filter: 'blur(0px)',
+          pointerEvents: 'auto',
+          border: '2px solid rgba(217,249,157,.7)',
+          boxShadow: `
+            0 0 24px rgba(217,249,157,.35),
+            0 0 48px rgba(217,249,157,.25),
+            0 0 72px rgba(217,249,157,.15)
+          `,
+        })
+      }
 
-        // 🔥 TAMBAHAN
-        border: '2px solid rgba(217,249,157,.7)',
-        boxShadow: `
-    0 0 24px rgba(217,249,157,.35),
-    0 0 48px rgba(217,249,157,.25),
-    0 0 72px rgba(217,249,157,.15)
-  `,
-      })
-
-
-      gsap.set(navRef.current[0], {
-        background: '#d9f99d',
-        boxShadow: '0 0 14px rgba(217,249,157,.8)',
-      })
+      if (navRef.current[0]) {
+        gsap.set(navRef.current[0], {
+          background: '#d9f99d',
+          boxShadow: '0 0 14px rgba(217,249,157,.8)',
+        })
+      }
 
       const tl = gsap.timeline({
-
-
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
           end: `+=${window.innerHeight * (total - 1)}`,
           scrub: true,
           pin: true,
-          // snap: 1 / (total - 1),
         },
       })
 
       for (let i = 1; i < total; i++) {
+        if (!slidesRef.current[i] || !slidesRef.current[i - 1]) continue;
+
         tl
           .to(
             slidesRef.current[i],
@@ -103,15 +78,13 @@ export default function Projects() {
               filter: 'blur(0px)',
               border: '2px solid rgba(217,249,157,.7)',
               boxShadow: `
-      0 0 24px rgba(217,249,157,.35),
-      0 0 48px rgba(217,249,157,.25),
-      0 0 72px rgba(217,249,157,.15)
-    `,
+                0 0 24px rgba(217,249,157,.35),
+                0 0 48px rgba(217,249,157,.25),
+                0 0 72px rgba(217,249,157,.15)
+              `,
             },
             i
           )
-
-
           .to(
             slidesRef.current[i - 1],
             {
@@ -124,8 +97,6 @@ export default function Projects() {
             },
             i
           )
-
-
           .to(
             navRef.current[i],
             {
@@ -149,27 +120,32 @@ export default function Projects() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="projects" style={sectionStyle}>
-      <div style={containerStyle}>
+    <section ref={sectionRef} id="projects" className="projects-section">
+      <div className="projects-container">
         {/* LEFT */}
-        <div style={leftStyle}>
-          <h2 style={titleStyle}>PROJECTS</h2>
+        <div className="projects-left">
+          <h2 className="projects-title">PROJECTS</h2>
         </div>
 
         {/* RIGHT */}
-        <div style={rightStyle}>
-          <div style={sliderStyle}>
+        <div className="projects-right">
+          <div className="projects-slider">
             {projects.map((p, i) => (
               <div
-                key={p.id}
+                key={p.id || i}
                 ref={(el) => (slidesRef.current[i] = el)}
-                style={slideStyle}
+                className="project-slide"
               >
-                <div style={stepStyle}>0{i + 1}</div>
-                <h3 style={projectTitle}>{p.title}</h3>
-                <p style={projectDesc}>{p.desc}</p>
-                <span style={techStyle}>{p.tech.join(' · ')}</span>
-                <div style={detailBtnStyle}>
+                <div className="project-step">0{i + 1}</div>
+                <h3 className="project-name">{p.title}</h3>
+                <p className="project-desc">{p.desc}</p>
+
+                {/* Tech stack: hidden on mobile via CSS */}
+                <span className="project-tech">
+                  {Array.isArray(p.tech) ? p.tech.join(' · ') : p.tech}
+                </span>
+
+                <div className="project-btn-container">
                   <Link
                     to={`/projects/${p.id}`}
                     className="view-detail-btn"
@@ -182,12 +158,12 @@ export default function Projects() {
           </div>
 
           {/* INDICATOR BAWAH */}
-          <ul style={navStyle}>
+          <ul className="projects-nav">
             {projects.map((_, i) => (
               <li
                 key={i}
                 ref={(el) => (navRef.current[i] = el)}
-                style={navDotStyle}
+                className="nav-dot"
               />
             ))}
           </ul>
@@ -196,123 +172,3 @@ export default function Projects() {
     </section>
   )
 }
-
-/* ================= STYLES ================= */
-
-const sectionStyle = {
-  minHeight: '100vh',
-  background: 'linear-gradient(180deg,#0a0a0f,#1a1a2e)',
-  display: 'flex',
-  alignItems: 'center',
-}
-
-const containerStyle = {
-  display: 'block',
-  // gridTemplateColumns: '1fr 1.5fr',
-  gap: '80px',
-  width: '80%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 40px',
-}
-
-const leftStyle = {
-  // position: 'absolute',
-  // left: 0,
-  // top: '20%',
-  // transform: 'translateY(-90%)',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-}
-
-const titleStyle = {
-  position: 'absolute',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  top: '20%',
-  textAlign: 'center',
-  fontSize: '8rem',
-  fontWeight: 600,
-  color: '#fff',
-  letterSpacing: '4px',
-}
-
-const subtitleStyle = {
-  color: 'rgba(255,255,255,.6)',
-  marginTop: '12px',
-}
-
-const rightStyle = {
-  position: 'relative',
-}
-
-const sliderStyle = {
-  position: 'relative',
-  minHeight: '360px',
-}
-
-const slideStyle = {
-  position: 'absolute',
-  inset: 0,
-  padding: '48px',
-  borderRadius: '20px',
-  background: 'rgba(255,255,255,.08)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255,255,255,.15)',
-}
-
-const stepStyle = {
-  fontSize: '3rem',
-  color: 'rgba(217,249,157,.25)',
-  fontWeight: 700,
-}
-
-const projectTitle = {
-  fontSize: '1.6rem',
-  color: '#fff',
-  marginTop: '12px',
-}
-
-const projectDesc = {
-  color: 'rgba(255,255,255,.7)',
-  marginTop: '12px',
-  lineHeight: 1.6,
-}
-
-const techStyle = {
-  marginTop: '18px',
-  display: 'inline-block',
-  color: '#d9f99d',
-  fontSize: '.85rem',
-}
-
-/* INDICATOR BAWAH */
-const navStyle = {
-  marginTop: '28px',
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '14px',
-}
-
-const navDotStyle = {
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-  background: 'rgba(255,255,255,.25)',
-}
-
-const activeSlideStyle = {
-  border: '1px solid rgba(217,249,157,.6)',
-  boxShadow: '0 0 28px rgba(217,249,157,.35)',
-}
-
-const detailBtnStyle = {
-  position: 'relative',
-  zIndex: 9999,
-  width: '100%',
-  textAlign: 'right',
-  marginTop: '24px',
-
-}
-

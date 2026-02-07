@@ -7,13 +7,19 @@ gsap.registerPlugin(ScrollTrigger)
 
 const skills = [
   { name: 'HTML', percent: 90, color: '#ff4d4f', logo: '/logos/html.png' },
-  { name: 'CSS', percent: 85, color: '#3b82f6', logo: '/logos/css.png' },
+  { name: 'CSS', percent: 90, color: '#3b82f6', logo: '/logos/css.png' },
   { name: 'JavaScript', percent: 88, color: '#facc15', logo: '/logos/js.png' },
   { name: 'Python', percent: 90, color: '#3274a7', logo: '/logos/python.png' },
   { name: 'Node.js', percent: 80, color: '#22c55e', logo: '/logos/node.png' },
   { name: 'React', percent: 80, color: '#38bdf8', logo: '/logos/react.png' },
-  { name: 'Laravel', percent: 90, color: '#ff3426', logo: '/logos/Laravel.png' },
+  { name: 'Laravel', percent: 85, color: '#ff3426', logo: '/logos/Laravel.png' },
   { name: 'Flask', percent: 90, color: '#fe8208', logo: '/logos/flask.png' },
+  { name: 'Flutter', percent: 85, color: '#02569B', logo: '/logos/flutter.png' },
+  { name: 'MySQL', percent: 95, color: '#4479a1', logo: '/logos/mysql.png' },
+  { name: 'Firebase', percent: 80, color: '#ff9800', logo: '/logos/firebase.png' },
+  { name: 'MongoDB', percent: 70, color: '#47a248', logo: '/logos/mongodb.png' },
+
+
 ]
 
 const radius = 26

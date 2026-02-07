@@ -1,0 +1,166 @@
+.about-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #0f0f1a 0%, #0a0a0f 50%, #1a1a2e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-content {
+    max-width: 700px;
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 6px;
+    color: #d9f99d;
+    text-shadow: 0 0 30px rgba(217, 249, 157, 0.3);
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 2;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.about-btn {
+    background: #d9f99d;
+    color: #0a0a0f;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(217, 249, 157, 0.3);
+}
+
+.about-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(217, 249, 157, 0.5);
+}
+
+/* FLOATING PHOTOS */
+.floating-photo-container {
+    position: absolute;
+    z-index: 1;
+}
+
+.photo-glow {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    /* Slightly larger than container */
+    height: 140%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(217, 249, 157, 0.25) 0%, rgba(217, 249, 157, 0.05) 50%, transparent 70%);
+    filter: blur(25px);
+    z-index: 0;
+}
+
+.floating-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+/* POSITIONS (Desktop defaults) */
+.fp-1 {
+    top: 35%;
+    left: 10%;
+    width: 160px;
+    height: 200px;
+    transform: rotate(12deg);
+}
+
+.fp-2 {
+    top: 10%;
+    right: 20%;
+    width: 80px;
+    height: 110px;
+    transform: rotate(-10deg);
+}
+
+.fp-3 {
+    top: 55%;
+    right: 5%;
+    width: 130px;
+    height: 170px;
+    transform: rotate(10deg);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .fp-1 {
+        left: 5%;
+        width: 140px;
+    }
+
+    .fp-3 {
+        right: 2%;
+        width: 110px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 60px 20px;
+    }
+
+    .about-text {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    /* Reposition floating images so they don't cover text on mobile */
+    .fp-1 {
+        top: 5%;
+        left: 5%;
+        width: 100px;
+        height: 130px;
+        transform: rotate(-5deg);
+        opacity: 0.6;
+        /* Slight fade so text is readable if overlap happens */
+    }
+
+    .fp-2 {
+        top: 80%;
+        right: 10%;
+        width: 70px;
+        height: 90px;
+        transform: rotate(15deg);
+    }
+
+    .fp-3 {
+        top: 10%;
+        right: 5%;
+        width: 90px;
+        height: 120px;
+        transform: rotate(5deg);
+        opacity: 0.6;
+    }
+}

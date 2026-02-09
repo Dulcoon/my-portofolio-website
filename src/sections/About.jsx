@@ -8,6 +8,7 @@ import profileImg3 from '../assets/images/pict3.jpg'
 import '../styles/glass.css'
 import '../styles/about.css'
 
+
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {
@@ -84,15 +85,15 @@ const About = () => {
         <h2 className="about-title">WHO AM I ?</h2>
 
         <p className="about-text">
-          I Am a full-stack website developer specialized in ReactJS. Plus, I
-          also know some WordPress front-end development with Elementor and
-          WooCommerce. Programming is my passion.
+          I’m a Full-Stack Developer and Flutter Developer with a strong passion for building modern web and mobile applications. Programming is not just my profession — it’s something I truly enjoy exploring and growing in every day.
         </p>
 
-        <a href="#projects">
-          <button className="about-btn">
-            SHOW MY PROJECTS
-          </button>
+        <a
+          href="/CV_VALENN.pdf"
+          download="CV_VALENN.pdf"
+          className="about-btn"
+        >
+          Download CV
         </a>
       </div>
     </section>
